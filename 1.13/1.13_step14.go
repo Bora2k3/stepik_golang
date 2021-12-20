@@ -1,4 +1,3 @@
-//!!!!ДОДЕЛАТЬ!!!!
 //Номер числа Фибоначчи
 //Дано натуральное число A > 1. Определите, каким по счету числом Фибоначчи оно является, то есть выведите такое число n, что φn=A. Если А не является числом Фибоначчи, выведите число -1.
 //
@@ -19,33 +18,22 @@
 
 package main
 
-import (
-	"fmt"
-	"log"
-)
-
-func fib(n int) int {
-	a := 0
-	b := 1
-	for i := 0; i < n; i++ {
-		a, b = b, b+a
-	}
-	return a
-}
+import "fmt"
 
 func main() {
-	var n int
-	_, err := fmt.Scan(&n)
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	for i := 0; i < n; i++ {
-		if n == fib(i) {
+	var a int
+	fmt.Scan(&a)
+	fib := []int{0, 1}
+	for i := 2; ; i++ {
+		fib = append(fib, fib[i-2]+fib[i-1])
+		if a == fib[i] {
 			fmt.Println(i)
-			return
+			break
+		}
+		if a < fib[i] {
+			fmt.Println(-1)
+			break
 		}
 	}
 
-	fmt.Println(-1)
 }
